@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components{
+    .container{
+      @apply px-3 mx-auto w-full sm:max-w-[600px] md:max-w-[740px] lg:max-w-[990px] xl:max-w-[1216px]
+    }
+      .btn{
+          @apply px-3 py-2 text-white border bg-orange-800 rounded-full font-serif h-10 w-24 md:h-16 md:w-32 md:text-xl 
+      }
+    }
