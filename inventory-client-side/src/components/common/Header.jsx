@@ -1,9 +1,17 @@
 import React from "react";
 import { FaHome, FaPlus, FaUser } from "react-icons/fa";
-
 import { MdInventory } from "react-icons/md";
+import { IoMdLogOut } from "react-icons/io";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { logout } from "../../app/slice/userSlice";
 export default function Header() {
+  const reduxStore = useSelector((store) => store);
+  const user = reduxStore.user.value;
+  const dispatch = useDispatch();
+  const handleLogout =()=>{
+    dispatch(logout())
+  }
   return (
     <>
       <header>
@@ -29,13 +37,26 @@ export default function Header() {
                 Add Item <FaPlus />{" "}
               </li>
             </Link>
-            <Link to={"login"}>
-              {" "}
-              <li className="flex items-center gap-2">
-                {" "}
-                Login <FaUser />{" "}
-              </li>{" "}
-            </Link>
+           
+
+              {user? <> 
+              <li> User : {user.name} </li>
+              <li className="flex items-center gap-2 cursor-pointer" onClick={handleLogout} >             
+                Logout <IoMdLogOut />
+              </li> 
+              </>
+              : 
+              <>
+               <Link to={"login"}>
+              <li className="flex items-center gap-2">             
+                Login <FaUser />
+              </li>
+              </Link>
+              </>
+              }
+
+           
+
           </ul>
         </nav>
       </header>

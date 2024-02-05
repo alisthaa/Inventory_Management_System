@@ -3,6 +3,8 @@ import Home from './pages/Home'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
 import Products from './pages/Products'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { Route, Routes } from 'react-router-dom'
 import Header from './components/common/Header'
 import AddProduct from './pages/AddProduct'
@@ -17,5 +19,6 @@ export default function App() {
     <Route path='products' element={<Products/>}/>
     <Route path='addProduct' element={<AddProduct/>}/>
     </Routes>
+    <ToastContainer/>
   </>
 }

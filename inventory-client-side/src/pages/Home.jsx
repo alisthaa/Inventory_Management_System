@@ -1,7 +1,10 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 export default function Home() {
+  const reduxStore = useSelector((store) => store);
+  const user = reduxStore.user.value;
   return <>
 
   <div className="bg-[url('./assets/images/inventory-bg.jpg')] bg-cover bg-center h-screen">
@@ -10,11 +13,21 @@ export default function Home() {
   
 
 
-  <div className='flex items-center justify-center mt-28'> 
+<div className='flex items-center justify-center mt-28'> 
+{user? 
+<>
+<Link to={'products'}> <button className='btn hover:text-orange-800 hover:bg-white w-60 text-2xl' type='button'>View My Products</button> </Link>
+</>
+:
+<> 
 <div className='grid grid-cols-1 gap-5'>
     <Link to={'login'}> <button className='btn hover:text-orange-800 hover:bg-white' type='button'>Log In</button> </Link>
     <Link to={'signup'}> <button type='button ' className='btn hover:text-orange-800 hover:bg-white'>Sign Up</button>  </Link>
 </div>
+</>
+}
+
+
 </div>
 
 
