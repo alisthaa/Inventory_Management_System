@@ -30,7 +30,7 @@ export default function Header() {
                 View Items <MdInventory />{" "}
               </li>{" "}
             </Link>
-            <Link to={"addProduct"}>
+            <Link to={"products/add"}>
               {" "}
               <li className="flex items-center gap-2">
                 {" "}

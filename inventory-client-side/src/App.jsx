@@ -9,6 +9,10 @@ import { Route, Routes } from 'react-router-dom'
 import Header from './components/common/Header'
 import AddProduct from './pages/AddProduct'
 
+import UpsertProduct from './pages/EditProduct'
+import SingleProduct from './pages/SingleProduct'
+import EditProduct from './pages/EditProduct'
+
 export default function App() {
   return <>
   <Header/>
@@ -16,8 +20,15 @@ export default function App() {
     <Route path='/' element={<Home/>}/>
     <Route path='login' element={<Login/>}/>
     <Route path='signup' element={<Signup/>}/>
-    <Route path='products' element={<Products/>}/>
-    <Route path='addProduct' element={<AddProduct/>}/>
+
+
+    <Route path='products' >
+      <Route path='' element={<Products/>}/>
+      <Route path=":slug" element={<SingleProduct />} />
+    <Route path='add' element={<AddProduct/>}/>
+    <Route path="edit/:_id" element={<EditProduct/>}/>
+    </Route>
+
     </Routes>
     <ToastContainer/>
   </>

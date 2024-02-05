@@ -9,4 +9,16 @@
       .btn{
           @apply px-3 py-2 text-white border bg-orange-800 rounded-full font-serif h-10 w-24 md:h-16 md:w-32 md:text-xl 
       }
+      .form-group{
+        @apply mt-6
+    }
+    .form-label{
+        @apply block mb-1 capitalize
+    }
+    .form-control{
+        @apply  focus:outline-none border border-orange-800 w-auto md:w-80 md:h-10 px-2 py-1
+    }
+    .required-field{
+        @apply after:content-['_*'] after:text-red-500
+    }
     }

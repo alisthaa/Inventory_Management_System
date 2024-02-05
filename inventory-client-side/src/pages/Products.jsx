@@ -1,7 +1,99 @@
-import React from 'react'
-
+import axios from 'axios';
+import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom';
+import { CiEdit, CiShoppingCart, CiViewList } from "react-icons/ci";
+import { TbMoneybag } from "react-icons/tb";
+import { RxCross1 } from "react-icons/rx";
+import { FaEye, FaRupeeSign, FaShoppingBasket, FaShoppingCart, FaTrash } from "react-icons/fa";
+import { toast } from 'react-toastify';
 export default function Products() {
+  const [products, setProducts] = useState([]);
+  useEffect(() => {
+    let token = localStorage.getItem("token");
+    axios
+      .get('http://localhost:3000/api/products', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        console.log(res.data.data);
+        setProducts(res.data.data);
+      });
+  }, []);
+
+
+  const handleDelete=(props)=>{
+    //e.preventDefault();
+    let token = localStorage.getItem("token");
+console.log(props._id);
+axios.delete(`http://localhost:3000/api/products/${props._id}`,{
+  headers: {
+    Authorization: `Bearer ${token}`,
+  },
+})
+.then((res) => {
+  toast('Item Deleted')
+ })
+ .catch((err) => {
+   console.log(err);
+   toast.error("something went wrong please try again.");
+ });
+
+  }
+
+
   return <>
-  
+  <div className='flex gap-32 justify-center text-white text-lg my-5'>
+    <div className='flex items-center justify-center gap-2 h-24 w-48 border bg-orange-400 '> <CiShoppingCart/> Total Products</div>
+    <div className='flex items-center justify-center gap-2 h-24 w-48 border  bg-green-500 '> <TbMoneybag/> Total Store Value</div>
+    <div className='flex items-center justify-center gap-2 h-24 w-48 border bg-red-500 '> <RxCross1/> Out of Stock</div>
+  </div>
+<div className="container">
+      <table className="w-full">
+        <thead>
+          <tr>
+            <th className="border-2 px-4 py-2">Name</th>
+            <th className="border-2 px-4 py-2">Category</th>
+            <th className="border-2 px-4 py-2">Price</th>
+            <th className="border-2 px-4 py-2">Quantity</th>
+            <th className="border-2 px-4 py-2">Value</th>
+            <th className="border-2 px-4 py-2">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {products.map((product) => {
+            return (
+              <tr>
+                <td className="border-2 px-4 py-2">{product.title}</td>
+                <td className="border-2 px-4 py-2">{product.category}</td>
+                <td className="border-2 px-4 py-2">{product.price}</td>
+                <td className="border-2 px-4 py-2">{product.quantity}</td>
+                <td className="border-2 px-4 py-2">{product.price*product.quantity}</td>
+                <td className="border-2 px-4 py-2 ">
+                  <div className='flex items-center justify-center gap-8'> 
+                  <div>
+                    <Link to={`/products/${product._id}`}>
+                    <FaEye/>
+                    </Link>
+                  </div>
+                   <div> 
+                    <Link to={`/products/edit/${product._id}`}>
+                    <CiEdit/>
+                    </Link>
+                    </div>
+                    <div> 
+                     <FaTrash onClick={()=>{
+                      handleDelete(product)
+                     }}/>
+                     </div>
+                     </div>
+                    </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
   </>
 }
