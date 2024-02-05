@@ -1,11 +1,14 @@
 const path = require("path")
 const ProductModel = require("../model/products")
 
+
+
+
 let getProducts = async (req, res, next) => {
     // console.log(req.query);
     let searchTerm = req.query.searchTerm || ""
     let page = parseInt(req.query.page) || 1
-    let perPage =  parseInt(req.body.perPage) || 2;
+   // let perPage =  parseInt(req.body.perPage) || 2;
     let sortBy = { createdAt: -1 }
 let priceFrom = parseFloat(req.query.priceFrom) || 0;
 let priceTo= parseFloat(req.query.priceTo) || 999999;
@@ -49,13 +52,13 @@ else if (reqSortBy=="recent")
         let products = await ProductModel.find(filterObj)
             .populate("createdBy")
             .sort(sortBy)
-            .skip((page - 1) * perPage)
-            .limit(perPage)
+          //  .skip((page - 1) * perPage)
+           // .limit(perPage)
 let total = await ProductModel.find(filterObj)
 .countDocuments()
         res.send({
             page,
-            perPage,
+           // perPage
             total,
             data: products
         })
@@ -64,6 +67,23 @@ let total = await ProductModel.find(filterObj)
         next(err)
     }
 }
+
+const getProductById = async (req, res, next) => {
+    const productId = req.params.id;
+  
+    try {
+      const product = await ProductModel.findById(productId).populate("createdBy");
+  
+      if (!product) {
+        return res.status(404).json({ error: "Product not found" });
+      }
+  
+      res.json({ data: product });
+    } catch (err) {
+      next(err);
+    }
+  };
+
 
 let postProducts = async (req, res, next) => {
     // console.log("productdata", req.body);
@@ -149,6 +169,7 @@ const deleteProduct = async (req, res, next) => {
 
 module.exports = {
     "fetch": getProducts,
+    "getProductById":getProductById,
     "store": postProducts,
     "update":updateProducts,
     "remove": deleteProduct,

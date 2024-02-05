@@ -10,9 +10,15 @@ const ProductSchema = new Schema({
   price: {
     type: Number,
     min: 0,
-    default: 0
+    default: 0,
+    required: true
 },
 quantity:{
+type: Number,
+default: 0,
+required: true
+},
+inStock:{
 type: Number,
 },
   description :{
