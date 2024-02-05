@@ -12,7 +12,6 @@ const UserSchema = new Schema({
     required : true,
     type: String,
 // custom validataion
-
  validate:{
   validator :  async function(requestValue){
 let user = await mongoose.models.User.findOne({ email: requestValue})
@@ -28,7 +27,7 @@ return true
   password: {
     required : true,
     type: String,
-    select : false
+    
   }
 });
 

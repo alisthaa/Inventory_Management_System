@@ -8,9 +8,9 @@ function checkAuthentication (req, res, next){
 if (token){
     try{
         var decoded = jwt.verify(token,'shhhhh');
-        console.log(decoded);
-        loggedIn = true
+        console.log(decoded);      
         req.user= decoded
+        loggedIn = true
     }
     catch(err){
         console.log(err);
@@ -21,11 +21,10 @@ if(!loggedIn){
     return res.status(401).send("unauthenticated")
 
 }
-console.log("here");
 next()
     }
 catch(err){
-    res.send("server err")
+    next(err)
 }
 }
 module.exports ={

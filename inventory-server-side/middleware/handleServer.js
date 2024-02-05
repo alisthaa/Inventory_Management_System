@@ -17,16 +17,11 @@ module.exports = (err, req, res, next) => {
                 message: validationError[1].message
             })
        })
-
     }
-
 //    console.log(errorsArray);
 //    console.log(errorsArray[0][1].message);
-
-
-    
-    return res.status(status).send({
-        
+  
+    return res.status(status).send({      
         "error": err.message,
         "msg": message,
         errors: errors,

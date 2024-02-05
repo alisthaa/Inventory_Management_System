@@ -5,12 +5,12 @@ const handleServer = require('../middleware/handleServer');
 
 const signup= async function (req, res, next) {
     console.log("req.body", req.body);
-    let hashedPassword = await bcrypt.hash(req.body.password, 10);
-  try{
+    try{
+   // let hashedPassword = await bcrypt.hash(req.body.password, 10);
     let user = await UserModel.create({
       name: req.body.name,
       email:req.body.email,
-      password: hashedPassword
+      password: req.body.password
     })
     //link mongoose model
     res.send(user)
@@ -36,6 +36,8 @@ const signup= async function (req, res, next) {
 console.log(user);
 if(user){
 user = user.toObject()
+
+
 let hashedPassword= user.password
 delete user.password;
 let matched = await bcrypt.compare(req.body.password,hashedPassword );
