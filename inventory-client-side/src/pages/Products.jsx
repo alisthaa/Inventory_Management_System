@@ -22,6 +22,17 @@ export default function Products() {
       });
   }, []);
 
+  const totalProducts = products.length;
+  console.log(totalProducts);
+
+  const totalStoreValue = products.reduce((total, product) => {
+    return total + product.price * product.quantity;
+  }, 0);
+  console.log("storeValue",totalStoreValue);
+
+  const outOfStockProducts = products.filter((product) => product.quantity === 0);
+  console.log("outOfStock",outOfStockProducts.length);
+  let outOfStockCount = outOfStockProducts.length
 
   const handleDelete=(props)=>{
     //e.preventDefault();
@@ -45,9 +56,40 @@ axios.delete(`http://localhost:3000/api/products/${props._id}`,{
 
   return <>
   <div className='flex gap-32 justify-center text-white text-lg my-5'>
-    <div className='flex items-center justify-center gap-2 h-24 w-48 border bg-orange-400 '> <CiShoppingCart/> Total Products</div>
-    <div className='flex items-center justify-center gap-2 h-24 w-48 border  bg-green-500 '> <TbMoneybag/> Total Store Value</div>
-    <div className='flex items-center justify-center gap-2 h-24 w-48 border bg-red-500 '> <RxCross1/> Out of Stock</div>
+    <div className=' h-20 w-52 border bg-orange-400 '> 
+
+    <div className='flex items-center justify-center gap-2 text-xl'> 
+    <CiShoppingCart/> 
+    Total Products 
+    </div>
+    <div className='flex items-center justify-center text-3xl'> 
+    ({totalProducts})
+    </div>
+    </div>
+
+
+    <div className=' h-20 w-52 border  bg-green-500 '> 
+    <div className='flex items-center justify-center gap-2 text-xl'> 
+    <TbMoneybag/> 
+    Total Store Value 
+    </div>
+    <div className='flex items-center justify-center text-3xl'> 
+    ({totalStoreValue}) 
+    </div>
+    </div>
+
+
+    <div className=' h-20 w-52 border bg-red-500 '> 
+    <div className='flex items-center justify-center gap-2 text-xl'> 
+    <RxCross1/> 
+    Out of Stock 
+    </div>
+    <div className='flex items-center justify-center text-3xl'> 
+    ({outOfStockCount}) 
+    </div>
+    </div>
+
+
   </div>
 <div className="container">
       <table className="w-full">

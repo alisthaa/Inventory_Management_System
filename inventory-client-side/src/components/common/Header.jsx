@@ -3,12 +3,14 @@ import { FaHome, FaPlus, FaUser } from "react-icons/fa";
 import { MdInventory } from "react-icons/md";
 import { IoMdLogOut } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../../app/slice/userSlice";
+import { toast } from "react-toastify";
 export default function Header() {
   const reduxStore = useSelector((store) => store);
   const user = reduxStore.user.value;
   const dispatch = useDispatch();
+  const navigate= useNavigate()
   const handleLogout =()=>{
     dispatch(logout())
   }
@@ -24,19 +26,29 @@ export default function Header() {
                 Home <FaHome />{" "}
               </li>{" "}
             </Link>
-            <Link to={"products"}>
-              <li className="flex items-center gap-2">
+           
+              <li onClick={(event)=>{
+                event.preventDefault()
+                user? navigate('/products'): toast.error('login required')
+              }} className="flex items-center gap-2 cursor-pointer">
                 {" "}
                 View Items <MdInventory />{" "}
               </li>{" "}
-            </Link>
-            <Link to={"products/add"}>
+            
+            
+            
+
+            
               {" "}
-              <li className="flex items-center gap-2">
+              <li onClick={(event)=>{
+                event.preventDefault()
+                user? navigate('/products/add'): toast.error('login required')
+              }}
+              className="flex items-center gap-2 cursor-pointer">
                 {" "}
                 Add Item <FaPlus />{" "}
               </li>
-            </Link>
+            
            
 
               {user? <> 
