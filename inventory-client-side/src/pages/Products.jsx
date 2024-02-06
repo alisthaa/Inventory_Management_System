@@ -55,9 +55,9 @@ axios.delete(`http://localhost:3000/api/products/${props._id}`,{
 
 
   return <>
-  <div className='flex gap-32 justify-center text-white text-lg my-5'>
-    <div className=' h-20 w-52 border bg-orange-400 '> 
+  <div className='flex gap-3 md:gap-32 justify-center text-white text-lg my-5'>
 
+    <div className=' md:h-20 md:w-52 border bg-orange-400 '> 
     <div className='flex items-center justify-center gap-2 text-xl'> 
     <CiShoppingCart/> 
     Total Products 
@@ -68,7 +68,7 @@ axios.delete(`http://localhost:3000/api/products/${props._id}`,{
     </div>
 
 
-    <div className=' h-20 w-52 border  bg-green-500 '> 
+    <div className=' md:h-20 md:w-52 border  bg-green-500 '> 
     <div className='flex items-center justify-center gap-2 text-xl'> 
     <TbMoneybag/> 
     Total Store Value 
@@ -79,7 +79,7 @@ axios.delete(`http://localhost:3000/api/products/${props._id}`,{
     </div>
 
 
-    <div className=' h-20 w-52 border bg-red-500 '> 
+    <div className=' md:h-20 md:w-52 border bg-red-500 '> 
     <div className='flex items-center justify-center gap-2 text-xl'> 
     <RxCross1/> 
     Out of Stock 
@@ -95,11 +95,11 @@ axios.delete(`http://localhost:3000/api/products/${props._id}`,{
       <table className="w-full">
         <thead>
           <tr>
-            <th className="border-2 px-4 py-2">Name</th>
-            <th className="border-2 px-4 py-2">Category</th>
+            <th className="border-2 md:px-4 md:py-2">Name</th>
+            <th className="hidden md:block md:border-2 md:px-4 md:py-2">Category</th>
             <th className="border-2 px-4 py-2">Price</th>
             <th className="border-2 px-4 py-2">Quantity</th>
-            <th className="border-2 px-4 py-2">Value</th>
+            <th className="hidden md:block md:border-2 md:px-4 md:py-2">Value</th>
             <th className="border-2 px-4 py-2">Action</th>
           </tr>
         </thead>
@@ -107,13 +107,13 @@ axios.delete(`http://localhost:3000/api/products/${props._id}`,{
           {products.map((product) => {
             return (
               <tr>
-                <td className="border-2 px-4 py-2">{product.title}</td>
-                <td className="border-2 px-4 py-2">{product.category}</td>
-                <td className="border-2 px-4 py-2">{product.price}</td>
-                <td className="border-2 px-4 py-2">{product.quantity}</td>
-                <td className="border-2 px-4 py-2">{product.price*product.quantity}</td>
-                <td className="border-2 px-4 py-2 ">
-                  <div className='flex items-center justify-center gap-8'> 
+                <td className="border-2 px-1 py-1 md:px-4 md:py-2">{product.title}</td>
+                <td className="border-2 hidden md:block px-1 py-1 md:px-4 md:py-2">{product.category}</td>
+                <td className="border-2 px-1 py-1 md:px-4 md:py-2">{product.price}</td>
+                <td className="border-2 px-1 py-1 md:px-4 md:py-2">{product.quantity}</td>
+                <td className="md:border-2 hidden md:block px-1 py-1 md:px-4 md:py-2">{product.price*product.quantity}</td>
+                <td className="border-2 px-1 py-1 md:px-4 md:py-2 ">
+                  <div className='flex items-center justify-center gap-2 md:gap-8'> 
                   <div>
                     <Link to={`/products/${product._id}`}>
                     <FaEye/>

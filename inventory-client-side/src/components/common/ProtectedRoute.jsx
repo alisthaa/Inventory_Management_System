@@ -3,7 +3,9 @@ import { useSelector } from "react-redux";
 import { Navigate, Outlet } from "react-router-dom";
 
 export default function ProtectedRoute() {
-  let user = useSelector((store) => store.user.value);
+  const reduxStore = useSelector((store) => store);
+  const user = reduxStore.user.value;
+  console.log(user);
   if (user) {
     return <Outlet />;
   }

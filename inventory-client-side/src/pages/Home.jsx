@@ -16,7 +16,7 @@ export default function Home() {
 <div className='flex items-center justify-center mt-28'> 
 {user? 
 <>
-<Link to={'products'}> <button className='btn hover:text-orange-800 hover:bg-white w-60 text-2xl' type='button'>View My Products</button> </Link>
+<Link to={'products'}> <button className='btn hover:text-orange-800 hover:bg-white w-auto md:w-60 text-2xl' type='button'>View My Products</button> </Link>
 </>
 :
 <> 
