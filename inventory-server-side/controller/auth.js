@@ -6,11 +6,11 @@ const handleServer = require('../middleware/handleServer');
 const signup= async function (req, res, next) {
     console.log("req.body", req.body);
     try{
-   // let hashedPassword = await bcrypt.hash(req.body.password, 10);
+    let hashedPassword = await bcrypt.hash(req.body.password, 10);
     let user = await UserModel.create({
       name: req.body.name,
       email:req.body.email,
-      password: req.body.password
+      password: hashedPassword
     })
     //link mongoose model
     res.send(user)
