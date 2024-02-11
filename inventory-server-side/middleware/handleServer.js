@@ -18,6 +18,14 @@ module.exports = (err, req, res, next) => {
             })
        })
     }
+    /* if (err.isJoi) {
+        status = 400;
+        message = "Bad Request";
+        errors = err.details.map(detail => ({
+            field: detail.path[0],
+            message: detail.message
+        }));
+    } */
 //    console.log(errorsArray);
 //    console.log(errorsArray[0][1].message);
   
