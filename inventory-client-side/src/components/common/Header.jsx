@@ -34,11 +34,7 @@ export default function Header() {
                 {" "}
                 View Items <MdInventory />{" "}
               </li>{" "}
-            
-            
-            
-
-            
+          
               {" "}
               <li onClick={(event)=>{
                 event.preventDefault()
